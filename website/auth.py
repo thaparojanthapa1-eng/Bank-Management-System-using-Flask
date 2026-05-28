@@ -24,3 +24,19 @@ def login():
             flash("Account doesn't exist!!!", category="error")
 
     return render_template("login.html")
+
+@auth.create_account("/create_account", methods=["POST", "GET"])
+def create_account():
+    if request.method=="POST":
+        account_holder_name=request.form.get("account_holder_name")
+        citizenship_number=request.form.get("citizenship_number")
+        permanent_address=request.form.get("permanent_address")
+        temporary_address=request.form.get("temporary_address")
+        password_1=request.form.get("password_1")
+        password_2=request.form.get("password_2")
+        email=request.form.get("email")
+
+@auth.logout("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("auth.login"))
